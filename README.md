@@ -235,8 +235,9 @@ The ANOVA F-Statistic measures the ratio of two variances:
 
 - __Between-Group Variance__: How much the means of different groups vary from the global mean of the data. This reflects the variability in data due to the categorical variable we group by.
 
-- __Within-Group Variance__: How much individual data points within each group vary from their own group mean. This reflects the variability in data that is due to randomness or inherent variation within each group.$$F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}$$
-​
+- __Within-Group Variance__: How much individual data points within each group vary from their own group mean. This reflects the variability in data that is due to randomness or inherent variation within each group.
+
+<img src="https://latex.codecogs.com/svg.latex?F%20%3D%20%5Cfrac%7B%5Ctext%7BBetween-Group%20Variance%7D%7D%7B%5Ctext%7BWithin-Group%20Variance%7D%7D" alt="F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}">
  
 Here's what the F-value indicates:
 
@@ -252,7 +253,7 @@ __Simulated__
 Below is a histogram representing the results of 1000 simulated F-Statistics under the Null Hypothesis
 <iframe src="assets/simulated_f_statistic.html" width="800" height="600" frameborder="0"></iframe>
 
-For this hypothesis test, it is appropriate to use $0.005$ as the significance level. As we are handling complicated data that relates to important economic factors, we must be certain that inequities exist in order to justify acting on them or investigating them further.
+For this hypothesis test, it is appropriate to use 0.005 as the significance level. As we are handling complicated data that relates to important economic factors, we must be certain that inequities exist in order to justify acting on them or investigating them further.
 
 __Conclusion__
 With this p-value, we reject the null hypothesis. We conclude that the economic well-being of a state, as measured by its GSP relative of the GDP of the United States, likely impacts the duration of the state's major power outages.
@@ -279,10 +280,10 @@ In short, this prediction problem is worth pursuing regardless of the outcome, a
 - This prediction problem is a regression problem, as the change in GSP a state experiences year-over-year is a quantitative and continuous 
 variable. 
 
-- I will use $RMSE$ as my metric of choice.
+- I will use RMSE as my metric of choice.
 
-     - $RMSE$ is sensitive to large outliers, which is desirable when predicting potentially negative economic shifts. I want to weight outliers heavily, as ignoring largr outliers in our predictive model could lead to lowballing the economic impact of power outages in specific circumstances.
-    - Additionally, $RMSE$ is expressed in the same units as the target variable, making it relatively easy to interpret.
+     - RMSE is sensitive to large outliers, which is desirable when predicting potentially negative economic shifts. I want to weight outliers heavily, as ignoring largr outliers in our predictive model could lead to lowballing the economic impact of power outages in specific circumstances.
+    - Additionally, RMSE is expressed in the same units as the target variable, making it relatively easy to interpret.
 
 These specifications frame our problem, and will inform our model's decisions.
 
