@@ -347,10 +347,10 @@ Comparing our baseline models against each other, the __Random Forest Regressor_
 ___
 ## Final Model
 
-### __Philosophy__
+### Philosophy
 Although it was addressed in our discussion of the baseline model's performance, I chose to use __Random Forest Regression__ because its baseline model showed more promise than an approach using Linear Regression. I used a __GridSearch__ to determine the highest-performing parameters, and the ones that performed the best in the final model were a max depth of 20 for each tree in the random forest, a minimum of 1 sample per leaf (And thus 2 samples allowed per split of a Node), and 200 estimators (Or trees).
 
-### __Features__
+### Features
 - `Customers Affected`. In my baseline model, the inclusion of `Customers Affected` and `Duration` was unnecessary. These features are collinear, and when using Random Forest Regression, may have diluted the importance of other features. This "dilution" effect can lead to less accurate predictions because the model spends part of its capacity on less informative aspects of the data. __In building my final model, I excluded `Duration` and retained `Customers Affected`. I also used a Standard Scaler for normalization, although this should not impact my model's decision-making.__
 - `NERC Region`. The NERC Region represents the geographic area that the state is in. I one-hot encoded this variable, as it is a nominal variable- that is, it is categorical with no inherent ordering.
      - __In building my final model, I also tested the inclusion of features such as `Climate Region`, but they were not as effective.__
@@ -359,14 +359,14 @@ Although it was addressed in our discussion of the baseline model's performance,
 
 The adjustments I made to feature engineering and selection are bolded in the analysis above.
 
-### __Performance__
+### Performance
 
 Our final model's RMSE was around 1.2%, about 65% better than our baseline model and over twice as low as the single-value predictor. This is because of one of two reasons;
 
-- __Effectiveness__
+- Effectiveness
      - It is possible that our model is truly very effective at predicting the change in a state's GSP given the features provided in the dataset. This is more of a "Null Hypothesis" approach, and assumes that there are no confounding variables when analyzing model performance with RMSE.
 
-- __Granularity__
+- Granularity
      - The granularity of the data may be too fine. By allowing the regressor unbinned access to some of the quantitative columns, it may have memorized characteristics of states within years to make artificially accurate predictions on our dataset. This is difficult to balance, because lowering granularity also dilutes or eliminates important information about an event.
  
 ### Conclusion
