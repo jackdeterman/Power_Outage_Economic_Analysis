@@ -179,7 +179,7 @@ __Significance Level__:
 __Observed__ <br>
 Below are the observed distributions of the `'Climate Category'` column with and without missing `'Customers Affected'` values.
 
-<iframe src="assets/climate_category_observed.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/climate_category_observed_real.html" width="800" height="600" frameborder="0"></iframe>
  These distributions look significantly more similar than the `'Cause Category'` distributions did, but as before, we will wait to pass judgment until we successfully conduct a permutation test. Once again, we are comparing the distribution of two categorical variables, and so the test statistic for this permutation test is TVD.
  
 __Simulated__ <br>
