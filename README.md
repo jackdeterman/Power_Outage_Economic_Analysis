@@ -214,3 +214,7 @@ Below is a histogram representing the results of 1000 simulated TVDs under the N
 
 ##### Conclusion
 With a p-value of 0.3 - 0.4, we fail to reject the Null Hypothesis in this permutation test, and conclude that the missingness of the `'Customers Affected'` column is not likely to be MAR with respect to `'Climate Category'`.
+
+___
+## Hypothesis Testing
+
