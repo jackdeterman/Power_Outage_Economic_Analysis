@@ -158,3 +158,5 @@ __Conclusion__: None of the columns in the dataset are truly NMAR. Despite valid
 ### Missingness Dependency
 
 As previously mentioned, I will show that the missing data in the `'Customers Affected` column of the dataset is not `'NMAR'`, and has a dependency on other features in the dataset.
+
+This process involves 
