@@ -219,7 +219,7 @@ Although the below DataFrame is not what we will use to conduct our Hypothesis T
 __Important!__
 While this DataFrame looks similar to a population distribution, allowing for the use of TVD, it is not. This represents multiple group means, and none of these values need to sum to anything specific (Like the total duration, average duration, etc.).
 
-#### Defining a Test Statistic
+### Defining a Test Statistic
 It is not immediately obvious what test statistic we should use to approach this hypothesis test. 
 
 __Intuitive Idea__
@@ -238,9 +238,7 @@ The ANOVA F-Statistic measures the ratio of two variances:
 - __Within-Group Variance__: How much individual data points within each group vary from their own group mean. This reflects the variability in data that is due to randomness or inherent variation within each group.
 
 
-$$
-F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}} 
-$$
+$$ F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}} $$
 ​
  
 Here's what the F-value indicates:
@@ -248,3 +246,8 @@ Here's what the F-value indicates:
 A __high__ F-value suggests that the between-group variance is significantly larger than the within-group variance. This implies that the group means are not all the same; in other words, at least one group mean is significantly different from the others. The differences observed between groups are likely not due to chance alone.
 
 A __low__ F-value suggests that the between-group variance is not much larger than the within-group variance, indicating that any differences in group means could likely be due to random variation rather than an effect of the categorical variable.
+
+With this in mind, we will conduct a permutation test, using the ANOVA F-statistic as our test-statistic, and comparing our simulated tests with our observed statistic.
+
+### Permutation Test
+
