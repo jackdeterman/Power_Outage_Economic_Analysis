@@ -93,7 +93,6 @@ The most fundamental unit of our dataset is power outages, and understanding how
   height="600"
   frameborder="0"
 ></iframe>
-
 ##### Cause Distribution
 Another critical feature in our dataset is the `'Cause Category'` of a power outage. The visualization below displays the distribution of `'Cause Category'`, showing `'Severe Weather'` as the most common cause. While this is intuitive, it is interesting that `'Intentional Attack'` was the second leading cause of major power outages from 2000-2016 in the United States.
 
@@ -103,7 +102,6 @@ Another critical feature in our dataset is the `'Cause Category'` of a power out
   height="600"
   frameborder="0"
 ></iframe>
-
 With the more basic, yet critical, visualizations completed, let's explore a few more nuanced relationships before continuing.
 
 ##### Cause by Climate Region
@@ -115,8 +113,6 @@ This table displays the distribution of `'Cause Category'` between the different
   height="600"
   frameborder="0"
 ></iframe>
-
-
 ##### Power Outages per State per Year
 This interactive choropleth displays the number of major power outages per state per year. There are lots of interesting features in this visualization (Look at Washington in 2011, for example), and I welcome you to explore the plot on your own and observe the trends over time!
 
@@ -126,7 +122,6 @@ This interactive choropleth displays the number of major power outages per state
   height="600"
   frameborder="0"
 ></iframe>
-
 Now, let's continue with our analysis.
 
 ___
@@ -175,7 +170,6 @@ Below is the observed distribution of the `'Cause Category'` column when `'Custo
   height="600"
   frameborder="0"
 ></iframe>
-
 Below is a histogram representing the results of 1000 simulated TVDs under the Null Hypothesis.
 ##### Simulated
 <iframe
@@ -184,7 +178,6 @@ Below is a histogram representing the results of 1000 simulated TVDs under the N
   height="600"
   frameborder="0"
 ></iframe>
-
 ##### Conclusion
 With a p-value of 0.0, we reject the Null Hypothesis in this permutation test, and determine that the missingness of `'Customers Affected'` is highly likely to be MAR with respect to `'Cause Category'`.
 
@@ -202,7 +195,6 @@ Below is the observed distribution of the `'Climate Category'` column when `'Cus
   height="600"
   frameborder="0"
 ></iframe>
-
 Below is a histogram representing the results of 1000 simulated TVDs under the Null Hypothesis.
 ##### Simulated
 <iframe
@@ -211,7 +203,6 @@ Below is a histogram representing the results of 1000 simulated TVDs under the N
   height="600"
   frameborder="0"
 ></iframe>
-
 ##### Conclusion
 With a p-value of 0.3 - 0.4, we fail to reject the Null Hypothesis in this permutation test, and conclude that the missingness of the `'Customers Affected'` column is not likely to be MAR with respect to `'Climate Category'`.
 
