@@ -128,6 +128,14 @@ This interactive choropleth displays the number of major power outages per state
 ></iframe>
 
 Now, let's continue with our analysis.
+
 ___
 ## Assessment of Missingness
+
+### NMAR Data
+Data that is Not Missing At Random (NMAR) is data in which the missingness of a value is likely dependent on the value itself. A common example of NMAR data is missing data in a survey about education level. In this example, individuals with lower education levels are less likely to reply to the survey, and as such, the missingness of a value likely depends on what the value would have been.
+
+Let's apply this definition to our dataset to determine whether we have any NMAR data.
+
+First, 
 
