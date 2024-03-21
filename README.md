@@ -92,7 +92,6 @@ To further our understanding of the information, let's examine some visualizatio
   height="600"
   frameborder="0"
 ></iframe>
-
 The most fundamental unit of our dataset is power outages, and understanding how their frequency has changed over time is a crucial piece of context to have when conducting any form of analysis on this data. Above, we see the frequency of power outages in every month in our dataset. There is a visible spike in the summer of 2011, when the United States experienced one of the most active hurricane seasons in its history. Climaxing with Hurricane Irene in August but containing a total of 19 named storms, this spike in our dataset makes sense.
 
 ##### Cause Distribution
@@ -103,16 +102,27 @@ The most fundamental unit of our dataset is power outages, and understanding how
   height="600"
   frameborder="0"
 ></iframe>
-
 Another critical feature in our dataset is the `'Cause Category'` of a power outage. The visualization above displays the distribution of `'Cause Category'`, showing `'Severe Weather'` as the most common cause. While this is intuitive, it is interesting that `'Intentional Attack'` was the second leading cause of major power outages from 2000-2016 in the United States.
 
-##### GSP's Effect on Duration
+With the more basic, yet critical, visualizations completed, let's explore a few more nuanced relationships before continuing.
+
+##### Cause by Climate Region
 
 <iframe
-  src="assets/gsp_and_duration.html"
+  src="assets/climate_region_cause.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+This table displays the distribution of `'Cause Category'` between the different `'Climate Region'`s present in our DataFrame. While much of the information is intuitive, it is interesting to note that the West North Central region has a markedly low number of major power outages. Further, I found it interesting that in the South, the second-leading cause of major power outages was `'Public Appeal'`.
 
-With the more basic, yet critical, visualizations completed, 
+##### Power Outages per State per Year
+
+<iframe
+  src="assets/climate_region_cause.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+This interactive choropleth displays the number of major power outages per state per year. There are lots of interesting features in this visualization (Look at Washington in 2011, for example), and I welcome you to explore the plot on your own and observe the trends over time!
+
