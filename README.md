@@ -8,7 +8,7 @@ ___
 ## Introduction
 The reliability and resilience of power infrastructure play a pivotal role in ensuring smooth economic operations in the United States. Further, higher economic activity bolsters infrastructure, creating a fascinating mutualistic relationship. Through an analytical lens, this project seeks to unravel the complex characteristics that underpin this interaction, centered around the probing question: "How do the economic characteristics of a state or region influence the impact of major power outages, and conversely, how do such power outages affect the area's economy?" The relevance of this question extends beyond academic curiosity; it touches the core of the economic inequities in our country. Understanding the economic ramifications of power outages is paramount as our societies become increasingly dependent on stable electricity supply. This analysis aims to illuminate the direct effects of and shed light on how economic factors might amplify or mitigate these consequences.
 
-The dataset used in this project, comprising 1534 rows and 56 columns, serves as a comprehensive canvas to explore this nuanced interconnectedness. Only a handful of columns were used for the bulk of this analysis, and they can be broken into a few categories;
+The dataset used in this project, comprising 1534 rows and 56 columns, serves as a comprehensive canvas to explore this nuanced interconnectedness. It represents detailed information on every major power outage in the United States from 2000 to 2016. Only a handful of columns were used for the bulk of this analysis, and they can be broken into a few categories;
 
 
 #### Geographic / Climate Data
@@ -85,9 +85,34 @@ The first five rows of the cleaned DataFrame look like this:
 To further our understanding of the information, let's examine some visualizations related to our dataset.
 
 ##### Outages over Time
+
 <iframe
   src="assets/outages_over_time.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+The most fundamental unit of our dataset is power outages, and understanding how their frequency has changed over time is a crucial piece of context to have when conducting any form of analysis on this data. Above, we see the frequency of power outages in every month in our dataset. There is a visible spike in the summer of 2011, when the United States experienced one of the most active hurricane seasons in its history. Climaxing with Hurricane Irene in August but containing a total of 19 named storms, this spike in our dataset makes sense.
+
+##### Cause Distribution
+
+<iframe
+  src="assets/cause_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Another critical feature in our dataset is the `'Cause Category'` of a power outage. The visualization above displays the distribution of `'Cause Category'`, showing `'Severe Weather'` as the most common cause. While this is intuitive, it is interesting that `'Intentional Attack'` was the second leading cause of major power outages from 2000-2016 in the United States.
+
+##### GSP's Effect on Duration
+
+<iframe
+  src="assets/gsp_and_duration.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+With the more basic, yet critical, visualizations completed, 
