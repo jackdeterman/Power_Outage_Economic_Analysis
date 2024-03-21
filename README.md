@@ -137,5 +137,24 @@ Data that is Not Missing At Random (NMAR) is data in which the missingness of a 
 
 Let's apply this definition to our dataset to determine whether we have any NMAR data.
 
-First, 
+First, let's look at the columns that contain missing values:
 
+|Column	                 |Description|
+|---                     |---        |
+|`'Climate Region'`            |The U.S. Climate region, as specified by National Centers for Environmental Information, in which the outage occurred|
+|`'Hurricane Name'`	           |The name of the hurricane that caused the outage, if applicable|
+|`'Duration'`	           |The length of the outage|
+|`'Demand Loss'`	         |The peak electricity demand loss during the outage|
+|`'Customers Affected'`	           |The number of customers affected by the outage|
+
+Now, let's discuss the possibility of NMAR data in each of these columns.
+
+- `'Climate Region'`: In the dataset, all of the of missing `'Climate Region'` values have a corresponding `'State'` value of `'HI'`, meaning that Hawaii does not have a `'Climate Region'` in this dataset. While the missing value certainly "depends" on other columns (Specifically, the `'State'` column), thinking critically about its missingness reveals that this data does not truly depend on other columns or the missing value itself. With some domain knowledge about the National Centers for Environmental Information, one understands that the U.S. Climate regions in this dataset only encapsulate the contiguous United States. As such, any row concerning `'Hawaii'` cannot have a value in the `'Climate Region'` column- it wouldn't make sense.
+- `'Hurricane Name'`: The missingness of the `'Hurricane Name'` column is self-explanatory. As these values are only filled when applicable, it makes sense that many of these values would be missing in our dataset. It would not make sense to include a Hurricane Name for a power outage caused by an intentional attack, or public appeal. As in `'Climate Region'`, this data is missing by design, and not dependent on the value of the data.
+- `'Duration'`, `'Demand Loss'`, `'Customers Affected'`: The missingness mechanism of the values in these three columns is interesting to discuss. Intuitively, it seems as though more severe outages would be more likely to produce metrics that are hard or impossible to accurately capture- who knows, for example, the true duration of an outage caused by Hurricane Katrina, when the first power was lost and the last power was restored. And with this logic, the data in all three of these columns is NMAR. Higher values of `'Duration'`, `'Demand Loss'`, and `'Customers Affected'` would be significantly harder to confidently measure and accurately report, thus making them more likely to be missing. However, this fails to consider confounding variables that are also correlated with outage severity. As I will show in the next section of the analysis, many other featuers indirectly influence the likelihood that the data in these columns are missing.
+
+__Conclusion__: None of the columns in the dataset are truly NMAR. Despite valid logic supporting their classification as such, further analysis will show that other features impact the likelihood that data, otherwise labeled as NMAR, is missing. As such, these data are truly Missing At Random (MAR).
+
+### Missingness Dependency
+
+As previously mentioned, I will show that the missing data in the `'Customers Affected` column of the dataset is not `'NMAR'`, and has a dependency on other features in the dataset.
