@@ -238,7 +238,9 @@ The ANOVA F-Statistic measures the ratio of two variances:
 - __Within-Group Variance__: How much individual data points within each group vary from their own group mean. This reflects the variability in data that is due to randomness or inherent variation within each group.
 
 
-$$ F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}} $$
+```math
+F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}$$
+```
 ​
  
 Here's what the F-value indicates:
