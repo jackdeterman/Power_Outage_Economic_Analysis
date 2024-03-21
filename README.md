@@ -142,7 +142,7 @@ This process involves constructing and executing a permutation test to determine
 
 #### Permutation Test 1
 __Null Hypothesis__:
-The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column
+The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column<br>
 __Alternative Hypothesis__:
 The missingness of the `'Customers Affected'` column is dependent on the `'Cause Category'` column.
 
@@ -161,7 +161,7 @@ With a p-value of 0.0, we reject the Null Hypothesis in this permutation test, a
 
 #### Permutation Test 2
 __Null Hypothesis__:
-The missingness of the `'Customers Affected`' column is not dependent on the `'Climate Category'` column
+The missingness of the `'Customers Affected`' column is not dependent on the `'Climate Category'` column<br>
 __Alternative Hypothesis__:
 The missingness of the `'Customers Affected'` column is dependent on the `'Climate Category'` column.
 
