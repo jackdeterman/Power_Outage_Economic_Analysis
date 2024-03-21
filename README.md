@@ -148,8 +148,8 @@ __Null Hypothesis__:
 __Alternative Hypothesis__:
 - The missingness of the `'Customers Affected'` column is dependent on the `'Cause Category'` column.
 
-__Significance Level__:
-- For this permutation test, we will use the standard significance level of 0.05.
+__Significance Level__<br>
+For this permutation test, we will use the standard significance level of 0.05.
 
 __Observed__ <br>
 Below are the observed distributions of the `'Cause Category'` column with and without missing `'Customers Affected'` values.
