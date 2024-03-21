@@ -238,9 +238,7 @@ The ANOVA F-Statistic measures the ratio of two variances:
 - __Within-Group Variance__: How much individual data points within each group vary from their own group mean. This reflects the variability in data that is due to randomness or inherent variation within each group.
 
 
-```math
-F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}$$
-```
+$$F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}$$
 ​
  
 Here's what the F-value indicates:
@@ -265,3 +263,31 @@ With this p-value, we reject the null hypothesis. We conclude that the economic 
 
 ___
 ## Framing a Prediction Problem
+### Introduction / Motivation
+
+To continue with the theme of examining pertinent economic data, I feel it appropriate to frame a prediction problem that works to answer a larger economic question. There are a multitude of factors to consider and prediction problems to pursue, but my attention was captured by the `Change in GSP` column in our DataFrame.
+
+This column represents "Percentage change of per capita real GSP from the previous year (in %)," in the [words](https://www.sciencedirect.com/science/article/pii/S2352340918307182) of the researchers who provided this dataset. This immediately sparked my interest, and made me wonder whether the GSP of a state who had a major power outage would decline. This idea simply leverages the intuitive premise that significant disruptions in power supply could have tangible impacts on economic activity and productivity, which, in turn, could affect the GSP.
+
+This question is as fascinating as it is important, and further explores the potential economic inequity of our country through the lens of major disruptances in power supply.
+
+__Note__:
+There are a few things to consider when approaching this problem head-on.
+- GSP is influenced by a wide array of factors beyond power outages, including fiscal policies, global economic conditions, technological advancements, and more. Isolating the impact of power outages from these variables is extremely challenging, and may only provide part of the picture.
+- However, even if the predictive power for GSP changes directly is limited, the exploration could yield valuable insights into the resilience of different sectors or regions to power outages and contribute to broader economic resilience and planning discussions.
+
+In short, this prediction problem is worth pursuing regardless of the outcome, and we should not shy away from the potential shortcoming of our predictive model.
+
+### Problem Specifications:
+- This prediction problem is a regression problem, as the change in GSP a state experiences year-over-year is a quantitative and continuous 
+variable. 
+
+- I will use $RMSE$ as my metric of choice.
+
+     - $RMSE$ is sensitive to large outliers, which is desirable when predicting potentially negative economic shifts. I want to weight outliers heavily, as ignoring largr outliers in our predictive model could lead to lowballing the economic impact of power outages in specific circumstances.
+    - Additionally, $RMSE$ is expressed in the same units as the target variable, making it relatively easy to interpret.
+
+These specifications frame our problem, and will inform our model's decisions.
+
+### Available Data
+As a result of predicting loss in GSP over an entire year, all of the data in our dataset will be available to us at the time of prediction except for data relating to the GSP of the state. This is due to the fact that in practice, our model will be used after a major power outage has already occurred in order to predict the potentially detrimental economic effects it will have.
