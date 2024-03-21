@@ -43,8 +43,8 @@ The dataset used in this project, comprising 1534 rows and 56 columns, serves as
  Now that we have familiarized ourselves with the data, let's continue with our project's set up.
 
 ___
- ## Data Cleaning and Exploratory Data Analysis
- ### Data Cleaning
+## Data Cleaning and Exploratory Data Analysis
+### Data Cleaning
 
 While I already presented the columns of the DataFrame that will be valuable to my analysis, the DataFrame required significant cleaning to arrive at a usable state. These are the first five rows of the raw DataFrame __(Make sure to scroll!)__
 
@@ -81,5 +81,4 @@ The first five rows of the cleaned DataFrame look like this:
 |  4 | MN      | MRO           | East North Central | warm               |   2015 |       1740 | severe weather     | None             |               250000 |           250 |               1.09203 |             1.7 |                  1.6687  |               13.07 |
 
 ### Exploratory Data Analysis
-
 
