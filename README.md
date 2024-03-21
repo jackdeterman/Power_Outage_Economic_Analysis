@@ -296,7 +296,7 @@ variable.
 
 - I will use RMSE as my metric of choice.
 
-     - RMSE is sensitive to large outliers, which is desirable when predicting potentially negative economic shifts. I want to weight outliers heavily, as ignoring largr outliers in our predictive model could lead to lowballing the economic impact of power outages in specific circumstances.
+     - RMSE is sensitive to large outliers, which is desirable when predicting potentially negative economic shifts. I want to weight outliers heavily, as ignoring larger outliers in our predictive model could lead to lowballing the economic impact of power outages in specific circumstances.
     - Additionally, RMSE is expressed in the same units as the target variable, making it relatively easy to interpret.
 
 These specifications frame our problem, and will inform our model's decisions.
