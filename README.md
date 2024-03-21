@@ -319,7 +319,7 @@ __Linear Regression__
 __Random Forest Regression__
 - This model performed Random Forest Regression using the `Duration`,  `Customers Affected`, `NERC Region`, and `GSP Relative to USA` columns of the DataFrames to predict the `Change in GSP` values. Its RMSE was around 1.9%.
 
-#### Analysis
+### Analysis
 Comparing our baseline models against each other, the __Random Forest Regressor__ was better at predicting the GSP change than the single-value estimator and the Linear Regression model. Let's discuss the approach I took when implementing the baseline model.
 
 #### Features
