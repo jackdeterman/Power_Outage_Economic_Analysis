@@ -385,4 +385,13 @@ __Alternative Hypothesis:__
 
 We will conduct this test using the test statistic `np.abs(rmse_lower - rmse_upper)`, or the absolute difference between the RMSEs of states in the lower quartile of `GSP Relative to USA` and states in the upper quartile of `GSP Relative to USA`. We will use a significance level of 0.01, so that we only reject the Null Hypothesis with compelling evidence.
 
+__Simulated__
+Below is a histogram representing the results of 1000 simulated F-Statistics under the Null Hypothesis
+<iframe src="assets/fairness_distribution.html" width="800" height="600" frameborder="0"></iframe>
 
+__Conclusion__
+With this p-value, we fail to reject the null hypothesis. We conclude that it is highly likely that our model is fair between states in the lower quartile of `GSP Relative to USA` and states in the upper quartile of `GSP Relative to USA`.
+
+___
+# Thank You!
+I hope you enjoyed my analysis!
