@@ -119,10 +119,14 @@ This table displays the distribution of `'Cause Category'` between the different
 ##### Power Outages per State per Year
 
 <iframe
-  src="assets/climate_region_cause.html"
+  src="assets/outages_by_year.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 This interactive choropleth displays the number of major power outages per state per year. There are lots of interesting features in this visualization (Look at Washington in 2011, for example), and I welcome you to explore the plot on your own and observe the trends over time!
+
+Now, let's continue with our analysis.
+___
+## Assessment of Missingness
 
