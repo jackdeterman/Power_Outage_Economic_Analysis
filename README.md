@@ -251,3 +251,15 @@ With this in mind, we will conduct a permutation test, using the ANOVA F-statist
 
 ### Permutation Test
 
+__Simulated__
+Below is a histogram representing the results of 1000 simulated F-Statistics under the Null Hypothesis
+<iframe src="assets/simulated_f_statistic.html" width="800" height="600" frameborder="0"></iframe>
+
+For this hypothesis test, it is appropriate to use $0.005$ as the significance level. As we are handling complicated data that relates to important economic factors, we must be certain that inequities exist in order to justify acting on them or investigating them further.
+
+__Conclusion__
+With this p-value, we reject the null hypothesis. We conclude that the economic well-being of a state, as measured by its GSP relative of the GDP of the United States, likely impacts the duration of the state's major power outages.
+- This does not tell us about the true cause of lengthier power outages.
+
+___
+## Framing a Prediction Problem
