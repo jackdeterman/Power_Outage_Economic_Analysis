@@ -289,3 +289,100 @@ These specifications frame our problem, and will inform our model's decisions.
 
 ### Available Data
 As a result of predicting loss in GSP over an entire year, all of the data in our dataset will be available to us at the time of prediction except for data relating to the GSP of the state. This is due to the fact that in practice, our model will be used after a major power outage has already occurred in order to predict the potentially detrimental economic effects it will have.
+
+___
+## Baseline Model
+### Defining Baseline Models for Comparison
+
+To begin the predictive process, I will compare possible baseline approaches to predicting a state's change in GSP in a year they experienced a severe power outage.
+
+__Single Value Prediction__
+- As a reference point, I looked at the RMSE of a predictive model that predicts the mean of the `Change in GSP` column. Its RMSE was around 2.4%.
+
+__Linear Regression__
+- This model used the features `Duration`, `Customers Affected`, `NERC Region`, and `GSP Relative to USA` to create a Linear Regression model that predicted a state's `Change in GSP` the year that they have a major power outage. Its RMSE was around 2.3.
+
+__Random Forest Regression__
+- This model performed Random Forest Regression using the `Duration`,  `Customers Affected`, `NERC Region`, and `GSP Relative to USA` columns of the DataFrames to predict the `Change in GSP` values. Its RMSE was around 1.9.
+
+#### Analysis
+Comparing our baseline models against each other, the __Random Forest Regressor__ was better at predicting the GSP change than the single-value estimator and the Linear Regression model. Let's discuss the approach I took when implementing the baseline model.
+
+#### __Features__
+- `Duration` and `Customers Affected`. Intuitively, these features encapsulate information related to the severity of the power outage. As such, it makes sense to include them in the implementation of our baseline models. They are both quantitative, and I did not alter them or engineer them in any way before feeding them to the model.
+     - Alternatively, features such as `Demand Loss` could have been included to include the same information. This will not be overlooked, and may be a preferable alternative or addition to the model.
+- `NERC Region`. The NERC Region represents the geographic area that the state is in. I one-hot encoded this variable, as it is a nominal variable- that is, it is categorical with no inherent ordering. 
+     - This is, like `Duration` and `Customers Affected`, an arbitrary choice of which feature is most accurate for capturing geographic data. `Climate Region` could also be considered.
+- `GSP Relative to USA`. I included this feature to include auxiliary economic data in my model. This made the baseline model as well rounded as a Mk. 1 could be, as it included features related to the severity of the outage, the location of the outage, and the economic character of the area in which the outage occurred. As with `Duration` and `Customers Affected`, this feature is quantitative. However, I binned the values into $10$ deciles to discourage, at least for the baseline model, the potential memorization of economic indicators in specific states.
+
+
+#### __Limitations__
+
+- __Black box__. The Random Forest Regressor is a __black box__. While we could observe the weights of coefficients in our Linear Regression model and determine the variables with the most significant impact (after normalizing), this is not the case with Random Forest Regressors. As such, it is more difficult to reason why it displays the behavior it does.
+- __Hyperparameters__. Observing the optimal hyperparameters for our Random Forest Regressor raises suspicions about its performance.
+     - Unlimited depth is very often a sign of overfitting. However, our testing error is actually lower than our training error. This raises some red flags.
+     - __Possible Explanations__. By passing the model quantitative variables, the model may contain a multitude of trees that are "memorizing" some characteristic of states for every year in the dataset. This could be mitigated by binning data, similar to what I did with `GSP Relative to USA`. However, this must be balanced to maintain sufficient granularity in our data. 
+          - __Note__: It's also possible that our model is simply very good at predicting the percent change in `GSP` year over year with the given variables.
+- __The Data__. The actual values we're trying to predict are difficult to interpret. While the minimum value of this Series (-9.1%), is quite low, the median and mean are greater than 0! This may seem like it negates the purpose of our analysis but it is merely a limitation. 
+     - First, this data does __not__ include the context of the states that did __not__ experience a major power outage in a given year. It could be that while the states in our dataset saw their `GSP`s increase, they increased at a much lower rate than states that did not experience major power outages. 
+     - Second, regardless of other states, seeing an increase in `GSP` year over year, regardless of major power outages, would be a largely positive result of our analysis. "Negative" results or a lack of strong predictive power can be as enlightening as positive results, offering evidence that states may possess resilience against the economic impacts of power outages.
+ 
+ ### Plan for Refinement
+- One-hot encoding and including features such as `Cause Category` may be helpful, as it is possible that some types of power outages cause more harm than others. For example, an intentional attack that affects thousands of people may cause far less economic downturn than a hurricane that affects thousands of people.
+- Testing the inclusion of features such as `Demand Loss`, `Climate Category`, and `Urban Population` to ensure the robustness of our model and that no stones are left unturned.
+
+___
+## Final Model
+### Analysis
+
+#### __Philosophy__
+Although it was addressed in our discussion of the baseline model's performance, I chose to use __Random Forest Regression__ because its baseline model showed more promise than an approach using Linear Regression. I used a __GridSearch__ to determine the highest-performing parameters, and the ones that performed the best were a max depth of 20 for each tree in the random forest, a minimum of 1 sample per leaf (And thus 2 samples allowed per split of a Node), and 200 estimators (Or trees).
+
+#### __Features__
+- `Customers Affected`. In my baseline model, the inclusion of `Customers Affected` and `Duration` was unnecessary. These features are collinear, and when using Random Forest Regression, may have diluted the importance of other features. This "dilution" effect can lead to less accurate predictions because the model spends part of its capacity on less informative aspects of the data. __In building my final model, I excluded `Duration` and retained `Customers Affected`. I used a Standard Scaler for normalization, although this should not impact my model's decision-making.__
+- `NERC Region`. The NERC Region represents the geographic area that the state is in. I one-hot encoded this variable, as it is a nominal variable- that is, it is categorical with no inherent ordering.
+     - __In building my final model, I also tested the inclusion of features such as `Climate Region`, but they were not as effective.__
+- `GSP Relative to USA`. As in the baseline model, I included `GSP Relative to USA` as a feature in my final model. __However, to maximize granularity and allow the model full access to the data in the column, I chose not to bin the data this time.__
+- `Cause Category`. Including `Cause Category` proved beneficial to the model. As mentioned in the analysis of the previous section, it is possible that some types of power outages cause more harm than others. The example I provided compared the economic impacts of Hurricanes to those of intentional attacks, highlighting potential discrepancies. __I one-hot encoded this column, as it is qualitative and nominal.__
+
+  The adjustments I made to feature engineering and selection are bolded in the analysis above.
+
+#### __Performance__
+
+Our final model's RMSE was around 1.2%, about 65% better than our baseline model and over twice as low as the single-value predictor. This is because of one of two reasons;
+
+- __Effectiveness__
+     - It is possible that our model is truly very effective at predicting the change in a state's GSP given the features provided in the dataset. This is more of a "Null Hypothesis" approach, and assumes that there are no confounding variables when analyzing model performance with $RMSE$.
+
+- __Granularity__
+     - The granularity of the data may be too fine. By allowing the regressor unbinned access to some of the quantitative columns, it may have memorized characteristics of states within years to make artificially accurate predictions on our dataset. This is difficult to balance, because lowering granularity also dilutes or eliminates important information about an event.
+ 
+ #### Conclusion
+
+ In this section of the project, I developed and refined a predictive model aimed at understanding the economic impact of major power outages on states, as measured by the change in Gross State Product (GSP) per capita. Through a rigorous process of feature engineering and hyperparameter tuning, I arrived at a final model that demonstrated a significant improvement over our baseline model.
+
+The enhanced performance of our RandomForestRegressor model can, in part, be attributed to its ability to handle the granularity and complexity inherent in our dataset. By incorporating a diverse array of features our model was able to capture nuanced relationships between power outages and economic outcomes. However, it is essential to consider that the model's success may also stem from its capacity to "memorize" certain state-specific characteristics within a given year, potentially leading to artificially high predictions. This phenomenon underscores the challenge of distinguishing between genuine predictive insights and overfitting, especially without access to an even larger and more diverse dataset for validation.
+
+Moreover, this analysis reveals the critical importance of including data from a broad spectrum of states, particularly those that have not experienced major power outages. Such an inclusion would offer a more comprehensive view of the economic impact of power outages by providing a contrast with states who did not experience such disruptions. For example, in our current dataset, the mean change in GSP was positive, suggesting resilience or recovery in the face of power outages. However, this observation is limited by the lack of comparative data from states without major power outages. It is plausible that the economic performance of these unaffected states could be markedly better, highlighting a potential limitation of our dataset and analysis.
+
+In conclusion, while the final model represents a substantial advancement over more simplistic approaches to predicting the economic impact of power outages, it also opens avenues for further investigation. To truly grasp the full economic ramifications of major power outages, future research should endeavor to incorporate a more extensive dataset that includes a wider population of states, both affected and unaffected by power outages. Such explorations are essential to mitigate the economic fallout from power outages and enhance the resilience of state economies against such disruptions.
+
+___
+## Fairness Analysis
+### Philosophy
+
+As our model focuses on predicting economic outcomes, it is fitting to determine its performance on different economic groups.
+For example, there might be inherent economic resilience or vulnerability affecting the model's predictions, and a fairness analysis could reveal if the model underestimates or overestimates the impact of power outages on weaker vs. stronger economies.
+
+For this fairness analysis, I will compare the model's RMSE on states in the lower quartile of `GSP Relative to USA` with states in the upper quartile of `GSP Relative to USA`.
+
+### Permutation Test
+
+__Null Hypothesis:__
+- The model is fair between states in the lower quartile of `GSP Relative to USA` and states in the upper quartile of `GSP Relative to USA`- the observed difference in $RMSE$ is due to random chance. <br>
+__Alternative Hypothesis:__
+- The model is not fair between states in the lower quartile of `GSP Relative to USA` and states in the upper quartile of `GSP Relative to USA`- the observed difference in $RMSE$ is not due to random chance.
+
+We will conduct this test using the test statistic `np.abs(rmse_lower - rmse_upper)`, or the absolute difference between the RMSEs of states in the lower quartile of `GSP Relative to USA` and states in the upper quartile of `GSP Relative to USA`. We will use a significance level of 0.01, so that we only reject the Null Hypothesis with compelling evidence.
+
+
