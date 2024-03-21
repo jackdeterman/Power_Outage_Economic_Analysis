@@ -142,9 +142,9 @@ This process involves constructing and executing a permutation test to determine
 
 #### Permutation Test 1
 __Null Hypothesis__:
-The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column<br>
+- The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column<br>
 __Alternative Hypothesis__:
-The missingness of the `'Customers Affected'` column is dependent on the `'Cause Category'` column.
+- The missingness of the `'Customers Affected'` column is dependent on the `'Cause Category'` column.
 
 __Observed__
 Below is the observed distribution of the `'Cause Category'` column when `'Customers Affected'` is both missing and not missing. Visually, these distributions look significantly different, but it is inappropriate to pass judgment before conducting a permutation test to determine dependency. As we are comparing the distribution of two categorical variables, the test statistic for this permutation test is TVD.
@@ -161,9 +161,9 @@ With a p-value of 0.0, we reject the Null Hypothesis in this permutation test, a
 
 #### Permutation Test 2
 __Null Hypothesis__:
-The missingness of the `'Customers Affected`' column is not dependent on the `'Climate Category'` column<br>
+- The missingness of the `'Customers Affected`' column is not dependent on the `'Climate Category'` column<br>
 __Alternative Hypothesis__:
-The missingness of the `'Customers Affected'` column is dependent on the `'Climate Category'` column.
+- The missingness of the `'Customers Affected'` column is dependent on the `'Climate Category'` column.
 
 __Observed__
 Below is the observed distribution of the `'Climate Category'` column when `'Customers Affected'` is both missing and not missing. These distributions look significantly more similar than the `'Cause Category'` distributions did, but as before, we will wait to pass judgment until we successfully conduct a permutation test. Once again, we are comparing the distribution of two categorical variables, and so the test statistic for this permutation test is TVD.
@@ -181,3 +181,70 @@ With a p-value of 0.3 - 0.4, we fail to reject the Null Hypothesis in this permu
 ___
 ## Hypothesis Testing
 
+### Introduction:
+
+One would be remiss to avoid tackling the potential economic inequity underlying the information we wrestle with. As such, this portion of the project works to determine at a high level whether economic inequity impacts the nature of major power outages.
+
+Let's take a look at the economic data we're working with, in the context of a few other columns.
+
+|    | State   |   Duration | Cause Category     |   GSP Relative to USA |   Change in GSP |   Utility Percent of GSP |
+|---:|:--------|-----------:|:-------------------|----------------------:|----------------:|-------------------------:|
+|  0 | MN      |       3060 | severe weather     |               1.07738 |             1.6 |                  1.75139 |
+|  1 | MN      |          1 | intentional attack |               1.08979 |             1.9 |                  1.79    |
+|  2 | MN      |       3000 | severe weather     |               1.06683 |             2.7 |                  1.70627 |
+|  3 | MN      |       2550 | severe weather     |               1.07148 |             0.6 |                  1.93209 |
+|  4 | MN      |       1740 | severe weather     |               1.09203 |             1.7 |                  1.6687  |
+
+While `Change in GSP` and `Utility Percent of GSP` are valuable pieces of information, we will explore them further later. For this Hypothesis Test, I deemed it fitting to generalize the economic wellbeing of a state to its `GSP Relative to USA`. 
+- This column contains information on "Relative per capita real GSP as compared to the total per capita real GDP of the U.S. (expressed as fraction of per capita State real GDP & per capita US real GDP)" [source](https://www.sciencedirect.com/science/article/pii/S2352340918307182)
+
+__Null Hypothesis__:
+
+- There is no statistically significant difference in the mean duration of major power outages between states grouped by their GSP per capita relative to the United States' GDP per capita.
+
+__Alternative Hypothesis__:
+- There is a statistically significant difference in the average duration of major power outages between states grouped by their GSP per capita relative to the United States' GDP per capita.
+
+To set up, I added a column to our DataFrame that breaks the `Relative GSP Category` column into quartiles. Using the numerical values of the original column is a far too granular approach, and I decided on using quartiles for the sake of convention. Given unlimited time, I would likely perform further research into the appropriate number of groups to split the category into.
+
+Although the below DataFrame is not what we will use to conduct our Hypothesis Test, it is valuable to have a rudimentary understanding of our grouped data. Below, I displayed the mean Duration of major power outages per Relative GSP Category.
+
+| Relative GSP Category   |   Duration |
+|:------------------------|-----------:|
+| (0.639, 0.894]          |    2637.46 |
+| (0.894, 1.014]          |    3612.17 |
+| (1.014, 1.11]           |    1791.83 |
+| (1.11, 3.561]           |    2524.95 |
+
+__Important!__
+While this DataFrame looks similar to a population distribution, allowing for the use of TVD, it is not. This represents multiple group means, and none of these values need to sum to anything specific (Like the total duration, average duration, etc.).
+
+#### Defining a Test Statistic
+It is not immediately obvious what test statistic we should use to approach this hypothesis test. 
+
+__Intuitive Idea__
+
+It makes intuitive sense to compare the average unsigned distance of each group's mean to the global mean. This is a vague analogy to how TVD operates and attempts to compare the distribution to some "null" distribution.
+
+__However__, this does not consider the variability within groups themselves, which is crucial to understanding the variability of our permuted samples under the null hypothesis.
+- In other words, one must consider both distances from the global mean __and__ variance within groups to gain an accurate understanding of the data under the null hypothesis.
+
+#### Solution: ANOVA F-Statistic:
+
+The ANOVA F-Statistic measures the ratio of two variances:
+
+- __Between-Group Variance__: How much the means of different groups vary from the global mean of the data. This reflects the variability in data due to the categorical variable we group by.
+
+- __Within-Group Variance__: How much individual data points within each group vary from their own group mean. This reflects the variability in data that is due to randomness or inherent variation within each group.
+
+
+$$
+F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}} 
+$$
+​
+ 
+Here's what the F-value indicates:
+
+A __high__ F-value suggests that the between-group variance is significantly larger than the within-group variance. This implies that the group means are not all the same; in other words, at least one group mean is significantly different from the others. The differences observed between groups are likely not due to chance alone.
+
+A __low__ F-value suggests that the between-group variance is not much larger than the within-group variance, indicating that any differences in group means could likely be due to random variation rather than an effect of the categorical variable.
