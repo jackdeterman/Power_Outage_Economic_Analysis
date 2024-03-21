@@ -141,15 +141,19 @@ As previously mentioned, I will show that the missing data in the `'Customers Af
 This process involves constructing and executing a permutation test to determine whether unrelated columns could produce what we observe in our dataset.
 
 #### Permutation Test 1
+
 __Null Hypothesis__:
-- The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column<br>
+- The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column
+
 __Alternative Hypothesis__:
 - The missingness of the `'Customers Affected'` column is dependent on the `'Cause Category'` column.
 
-__Observed__
-Below is the observed distribution of the `'Cause Category'` column when `'Customers Affected'` is both missing and not missing. Visually, these distributions look significantly different, but it is inappropriate to pass judgment before conducting a permutation test to determine dependency. As we are comparing the distribution of two categorical variables, the test statistic for this permutation test is TVD.
+__Observed__:
+Below are the observed distributions of the `'Cause Category'` column with and without missing `'Customers Affected'` values.
 
 <iframe src="assets/file-name.html" width="800" height="600" frameborder="0"></iframe>
+
+Visually, these distributions look significantly different, but it is inappropriate to make judgments before conducting a permutation test to determine dependency. As we are comparing the distribution of two categorical variables, the test statistic for this permutation test is TVD.
 
 __Simulated__
 Below is a histogram representing the results of 1000 simulated TVDs under the Null Hypothesis.
