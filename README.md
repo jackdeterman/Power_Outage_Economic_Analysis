@@ -159,4 +159,58 @@ __Conclusion__: None of the columns in the dataset are truly NMAR. Despite valid
 
 As previously mentioned, I will show that the missing data in the `'Customers Affected` column of the dataset is not `'NMAR'`, and has a dependency on other features in the dataset.
 
-This process involves 
+This process involves constructing and executing a permutation test to determine whether unrelated columns could produce what we observe in our dataset.
+
+#### Permutation Test 1
+##### Null Hypothesis:
+The missingness of the `'Customers Affected`' column is not dependent on the `'Cause Category'` column
+##### Alternative Hypothesis:
+The missingness of the `'Customers Affected'` column is dependent on the `'Cause Category'` column.
+
+##### Observed
+Below is the observed distribution of the `'Cause Category'` column when `'Customers Affected'` is both missing and not missing. Visually, these distributions look significantly different, but it is inappropriate to pass judgment before conducting a permutation test to determine dependency. As we are comparing the distribution of two categorical variables, the test statistic for this permutation test is TVD.
+<iframe
+  src="assets/cause_category_observed.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Below is a histogram representing the results of 1000 simulated TVDs under the Null Hypothesis.
+##### Simulated
+<iframe
+  src="assets/cause_category_simulated.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+##### Conclusion
+With a p-value of 0.0, we reject the Null Hypothesis in this permutation test, and determine that the missingness of `'Customers Affected'` is highly likely to be MAR with respect to `'Cause Category'`.
+
+#### Permutation Test 2
+##### Null Hypothesis:
+The missingness of the `'Customers Affected`' column is not dependent on the `'Climate Category'` column
+##### Alternative Hypothesis:
+The missingness of the `'Customers Affected'` column is dependent on the `'Climate Category'` column.
+
+##### Observed
+Below is the observed distribution of the `'Climate Category'` column when `'Customers Affected'` is both missing and not missing. These distributions look significantly more similar than the `'Cause Category'` distributions did, but as before, we will wait to pass judgment until we successfully conduct a permutation test. Once again, we are comparing the distribution of two categorical variables, and so the test statistic for this permutation test is TVD.
+<iframe
+  src="assets/climate_category_observed.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Below is a histogram representing the results of 1000 simulated TVDs under the Null Hypothesis.
+##### Simulated
+<iframe
+  src="assets/climate_category_simulated.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+##### Conclusion
+With a p-value of 0.3 - 0.4, we fail to reject the Null Hypothesis in this permutation test, and conclude that the missingness of the `'Customers Affected'` column is not likely to be MAR with respect to `'Climate Category'`.
