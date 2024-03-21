@@ -62,7 +62,7 @@ While a daunting DataFrame to clean, I split the process into four steps:
 - Create new features using existing data,
 - Rename existing columns for readability.
 
-Then, I divided the dataset into components for the data cleaning process to familiarize myself with all of the information conveyed in the dataset. For this, I generally defaulted to the categorizations used by Sayanti Mukherjee, Roshanak Nateghi, and Makarand Hastak in their explanation of the variables in their article [Data on major power outage events in the continental U.S.](https://www.sciencedirect.com/science/article/pii/S2352340918307182). However, this came with numerous adjustments, as I will explain as I walk through the data cleaning process. Within each component, I walked through the four steps I described above.
+Then, I divided the dataset into components for the data cleaning process to familiarize myself with all of the information conveyed in the dataset. For this, I generally defaulted to the categorizations used by Sayanti Mukherjee, Roshanak Nateghi, and Makarand Hastak in their explanation of the variables in their article [Data on major power outage events in the continental U.S.](https://www.sciencedirect.com/science/article/pii/S2352340918307182). However, this came with numerous adjustments. Within each component, I walked through the four steps I described above.
 
 - __Geographic / Climate Data__: The climate data in the raw dataset was generally very well organized and formatted. In cleaning these columns, I first dropped redundancies present in the `'U.S._STATE'` and `'ANOMALY.LEVEL'` columns. They contained the same information as the `'State'` and `'Climate Category'` columns of the cleaned DataFrame, respectively, and were unnecessary to include. Then, I aggregated the time-related columns in the raw DataFrame into the `'Year'` column of the cleaned DataFrame. This entailed converting one of the columns to a DateTime datatype, extracting its year, and removing the resulting redundancies. I renamed the columns for readability and moved forward.
 - __Event-Specific Data__: There was no mechanically challenging data cleaning on any event-specific columns in the raw DataFrame. I removed repetitive columns, renamed the existing ones to the versions you were introduced to, and moved on.
@@ -82,3 +82,12 @@ The first five rows of the cleaned DataFrame look like this:
 
 ### Exploratory Data Analysis
 
+To further our understanding of the information, let's examine some visualizations related to our dataset.
+
+##### Outages over Time
+<iframe
+  src="assets/outages_over_time.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
