@@ -4,6 +4,7 @@
 ## Project Overview
 Originally for DSC80 at the University of California, San Diego, this project examines economic markers and potential explanatory economic trends in the context of major power outages in the United States. The original dataset can be accessed [in this article](https://www.sciencedirect.com/science/article/pii/S2352340918307182).
 
+___
 ## Introduction
 The reliability and resilience of power infrastructure play a pivotal role in ensuring smooth economic operations in the United States. Further, higher economic activity bolsters infrastructure, creating a fascinating mutualistic relationship. Through an analytical lens, this project seeks to unravel the complex characteristics that underpin this interaction, centered around the probing question: "How do the economic characteristics of a state or region influence the impact of major power outages, and conversely, how do such power outages affect the area's economy?" The relevance of this question extends beyond academic curiosity; it touches the core of the economic inequities in our country. Understanding the economic ramifications of power outages is paramount as our societies become increasingly dependent on stable electricity supply. This analysis aims to illuminate the direct effects of and shed light on how economic factors might amplify or mitigate these consequences.
 
@@ -41,6 +42,7 @@ The dataset used in this project, comprising 1534 rows and 56 columns, serves as
 
  Now that we have familiarized ourselves with the data, let's continue with our project's set up.
 
+___
  ## Data Cleaning and Exploratory Data Analysis
 
 While I already presented the columns of the DataFrame that will be valuable to my analysis, the DataFrame required significant cleaning to arrive at a usable state. These are the first five rows of the raw DataFrame (Make sure to scroll!):
